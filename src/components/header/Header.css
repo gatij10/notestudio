@@ -1,0 +1,23 @@
+.header {
+    display: flex;
+    justify-content: center;
+}
+
+.search-div{
+    align-items: center;
+    display: flex;
+}
+
+.search-input {
+    height: 30px;
+    width: 400px;
+    border-radius: 5px;
+    vertical-align: middle;
+    align-items: center;
+    display: flex;
+}
+
+.header-right {
+    align-items: center;
+    margin-left: 50%;
+}
