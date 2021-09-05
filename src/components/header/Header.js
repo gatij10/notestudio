@@ -1,15 +1,14 @@
-import React from 'react'
-import './Header.css'
+import React from "react";
+import "./Header.css";
 
 const Header = () => {
     return (
-        <div className="header">
-            <div className="search-div">
-                <input className="search-input" placeholder="Search" />
-            </div>
-            <h3 className="header-right">Hello user</h3>
-        </div>
-    )
-}
+        <nav className="header">
+            <h3> Logo </h3>
+            <input className="search-input" placeholder="Search" />
+            <h3>Hello User</h3>
+        </nav>
+    );
+};
 
-export default Header
+export default Header;
