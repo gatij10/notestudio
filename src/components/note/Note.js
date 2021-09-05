@@ -9,13 +9,10 @@ const Note = ({ title, content, id }) => {
     }
 
     return (
-
         <div className="note" draggable onDragStart={(event) => onDragStart(event, id)} id={id}>
             <h1 id={id}>{title}</h1>
             <p id={id}>{content}</p>
         </div>
-
-
     )
 }
 
