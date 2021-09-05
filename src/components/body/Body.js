@@ -33,6 +33,21 @@ const Body = () => {
             title: 'Phyllis Lapin',
             content: 'back and quiet she is very protective of her position in the company and her sales commissions.'
         },
+        {
+            id: 7,
+            title: 'Stanley Hudson',
+            content: 'Stanley is a fairly successful salesman who resents spending time in an office where he typically is not productive. Stanley tolerates Michael long and typically pointless conference room meetings by spending his time completing crossword puzzles.'
+        },
+        {
+            id: 8,
+            title: 'Stanley Hudson',
+            content: 'Stanley is a fairly successful salesman who resents spending time in an office where he typically is not productive. Stanley tolerates Michael long and typically pointless conference room meetings by spending his time completing crossword puzzles.'
+        },
+        {
+            id: 9,
+            title: 'Stanley Hudson',
+            content: 'Stanley is a fairly successful salesman who resents spending time in an office where he typically is not productive. Stanley tolerates Michael long and typically pointless conference room meetings by spending his time completing crossword puzzles.'
+        },
     ]
 
     return (
