@@ -1,28 +1,9 @@
 .header {
+  max-width: 1000px;
+  margin: auto;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
-  padding: 4px 25px;
-  /* border-bottom: 1px solid rgba(60, 64, 67, 0.2); */
-}
-
-/* .search-div{
-    align-items: center;
-    display: flex;
-} */
-
-.search-input {
-  height: 35px;
-  width: 420px;
-  border-radius: 5px;
-  vertical-align: middle;
-  align-items: center;
-  display: flex;
-  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-  font: inherit;
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
+  position: relative;
+  flex-wrap: nowrap;
 }
