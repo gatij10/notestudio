@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import './NoteInputForm.css'
+import { IoIosAdd } from "react-icons/io";
 
 function NoteInputForm({ notes, setNotes }) {
     const [isExpanded, setExpanded] = useState(false);
+
 
     const [note, setNote] = useState({
         id: new Date().valueOf().toString(),
@@ -37,8 +40,9 @@ function NoteInputForm({ notes, setNotes }) {
         ])
     }
 
+
     return (
-        <div className="container">
+        <div className="form">
             <form>
                 {isExpanded && (
                     <input
@@ -49,18 +53,18 @@ function NoteInputForm({ notes, setNotes }) {
                         onChange={handleChange}
                     />
                 )}
-                <p>
-                    <textarea
-                        value={note.content}
-                        onClick={handleExpanded}
-                        name="content"
-                        placeholder="Take a note..."
-                        onChange={handleChange}
-                        rows={isExpanded ? 3 : 1}
-                    ></textarea>
-                </p>
+
+                <textarea
+                    value={note.content}
+                    onClick={handleExpanded}
+                    name="content"
+                    placeholder="Take a note..."
+                    onChange={handleChange}
+                    rows={isExpanded ? 3 : 1}
+                ></textarea>
+
                 <button onClick={submitButton}>
-                    Add
+                    <IoIosAdd size={40} />
                 </button>
             </form>
         </div>
