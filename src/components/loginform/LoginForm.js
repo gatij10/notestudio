@@ -6,7 +6,7 @@ const LoginForm = () => {
         email: "",
         password: ""
     })
-    const { user, setUser } = useContext(UserContext);
+    const { setUser } = useContext(UserContext);
 
     function handleChange(e) {
         const { name, value } = e.target;
