@@ -11,7 +11,7 @@ const LoginPage = () => {
                 marginRight: "10%",
                 right: '0',
             }} />
-            <LoginForm />s
+            <LoginForm />
         </div>
     )
 }
