@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import fire from '../../utils/fire'
 
 const UserContext = React.createContext();
 
@@ -17,22 +18,32 @@ class UserProvider extends Component {
         this.setState({ user });
     };
 
+    handleSingup = () => {
+        
+        console.log('signup')
+    }
+
+    handleLogin = () => {
+        console.log('login')
+    }
+
     logout = () => {
         this.setState({});
     };
 
-
     render() {
         const { children } = this.props;
         const { user } = this.state;
-        const { setUser, logout } = this;
+        const { setUser, handleSingup, handleLogin, logout } = this;
 
         return (
             <UserContext.Provider
                 value={{
                     user,
                     setUser,
-                    logout,
+                    handleSingup,
+                    handleLogin,
+                    logout
                 }}
             >
                 {children}
