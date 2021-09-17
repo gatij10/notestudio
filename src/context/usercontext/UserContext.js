@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import fire from '../../utils/fire'
 
+
 const UserContext = React.createContext();
 
 class UserProvider extends Component {
@@ -11,6 +12,8 @@ class UserProvider extends Component {
             email: "",
             password: ""
         },
+
+        authErrorMessage: ""
     };
 
     // Method to update state
@@ -18,13 +21,57 @@ class UserProvider extends Component {
         this.setState({ user });
     };
 
+    setErrorMessage = (msg) => {
+        this.setState({ authErrorMessage: msg })
+    }
+
     handleSingup = () => {
-        
-        console.log('signup')
+        const { username, email, password } = this.state.user
+        this.setErrorMessage("");
+        fire.auth()
+            .createUserWithEmailAndPassword(email, password)
+            .then((res) => {
+                console.log(res)
+                console.log('Signup success')
+            }).catch((err) => {
+                switch (err.code) {
+                    case "auth/email-already-in-use":
+                    case "auth/invalid-email":
+                        this.setErrorMessage(err.message);
+                        break;
+                    case "auth/weak-password":
+                        this.setErrorMessage(err.message);
+                        break;
+                    default:
+                        console.log(err.code);
+                }
+            })
     }
 
     handleLogin = () => {
-        console.log('login')
+        const { email, password } = this.state.user
+        this.setErrorMessage("");
+        fire
+            .auth()
+            .signInWithEmailAndPassword(email, password)
+            .then(() => {
+                console.log(fire.auth().currentUser.uid);
+                console.log('login success')
+            })
+            .catch((err) => {
+                switch (err.code) {
+                    case "auth/invalid-email":
+                    case "auth/user-disabled":
+                    case "auth/user-not-found":
+                        this.setErrorMessage(err.message);
+                        break;
+                    case "auth/wrong-password":
+                        this.setErrorMessage(err.message);
+                        break;
+                    default:
+                        console.log(err.code);
+                }
+            })
     }
 
     logout = () => {
@@ -33,13 +80,14 @@ class UserProvider extends Component {
 
     render() {
         const { children } = this.props;
-        const { user } = this.state;
+        const { user, authErrorMessage } = this.state;
         const { setUser, handleSingup, handleLogin, logout } = this;
 
         return (
             <UserContext.Provider
                 value={{
                     user,
+                    authErrorMessage,
                     setUser,
                     handleSingup,
                     handleLogin,
