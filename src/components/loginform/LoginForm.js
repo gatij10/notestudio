@@ -1,14 +1,19 @@
 import React, { useContext, useState } from 'react'
-import { useHistory } from 'react-router-dom'
 import './LoginForm.css'
 import UserContext from '../../context/usercontext/UserContext'
+import { useHistory } from "react-router-dom";
 
 const LoginForm = () => {
 
-    const [signUp, setSignUp] = useState(false)
-
-    const { user, setUser, handleSingup, handleLogin, authErrorMessage } = useContext(UserContext);
+    const [signUp, setSignUp] = useState(false);
+    const [error, setError] = useState("")
+    const [user, setUser] = useState({
+        username: "",
+        email: "",
+        password: ""
+    })
     const history = useHistory();
+    const { handleSingup, handleLogin } = useContext(UserContext);
 
     function handleChange(e) {
         const { name, value } = e.target;
@@ -18,31 +23,38 @@ const LoginForm = () => {
         })
     }
 
-
-    function onSignUp(e) {
+    async function onSignUp(e) {
         e.preventDefault();
-        // history.push(`/home`);
-        setUser(user);
-        handleSingup()
+        try {
+            await handleSingup(user.email, user.password);
+            history.push('/home');
+        } catch (err) {
+            console.error(err);
+            setError(err.message);
+        }
     }
 
-    function onLogin(e) {
+    async function onLogin(e) {
         e.preventDefault();
-        // history.push(`/home`);
-        setUser(user);
-        handleLogin()
+        try {
+            await handleLogin(user.email, user.password);
+            history.push('/home');
+        } catch (err) {
+            console.error(err);
+            setError(err.message);
+        }
     }
 
     function onClickSignUp(e) {
         e.preventDefault()
+        setError("");
         setSignUp(false)
-        console.log('signup')
     }
 
     function onClickLogin(e) {
         e.preventDefault()
+        setError("");
         setSignUp(true)
-        console.log('login')
     }
 
     return (
@@ -51,10 +63,10 @@ const LoginForm = () => {
                 signUp === true ? (
                     <div className="login-form">
                         <h3 className="login-form-title">SignUp Form</h3>
-                        <input placeholder="Username" className="login-form-input" name="username" value={user.username} onChange={handleChange} required />
+                        <input placeholder="Username" className="login-form-input" value={user.username} onchange={handleChange} required />
                         <input placeholder="Email Id" type="email" name="email" value={user.email} onChange={handleChange} className="login-form-input" required />
                         <input placeholder="Password" type="password" name="password" value={user.password} onChange={handleChange} className="login-form-input" required />
-                        <p>{authErrorMessage}</p>
+                        <p className="error">{error}</p>
                         <button onClick={onSignUp} className="login-form-button">SignUp</button>
                         <p className="login-form-text">or</p>
                         <p className="login-form-text">Already have an account? <button className="signup-button" onClick={onClickSignUp}>Login</button></p>
@@ -66,7 +78,7 @@ const LoginForm = () => {
                         <h3 className="login-form-title">Login Form</h3>
                         <input placeholder="Email Id" type="email" name="email" value={user.email} onChange={handleChange} className="login-form-input" required />
                         <input placeholder="Password" type="password" name="password" value={user.password} onChange={handleChange} className="login-form-input" required />
-                        <p>{authErrorMessage}</p>
+                        <p className="error">{error}</p>
                         <button onClick={onLogin} className="login-form-button">Login</button>
                         <p className="login-form-text">or</p>
                         <p className="login-form-text">Don't have an account? <button className="signup-button" onClick={onClickLogin}>SignUp</button></p>
