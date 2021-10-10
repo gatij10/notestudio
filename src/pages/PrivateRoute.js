@@ -4,6 +4,7 @@ import UserContext from '../context/usercontext/UserContext'
 
 export default function PrivateRoute({ component: Component, ...rest }) {
     const { user } = useContext(UserContext);
+
     return (
         <Route
             {...rest}

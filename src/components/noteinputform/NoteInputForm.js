@@ -1,15 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import './NoteInputForm.css'
 import { IoIosAdd } from "react-icons/io";
+import UserContext from "../../context/usercontext/UserContext";
+import NoteContext from "../../context/notecontext/NoteContext";
 
-function NoteInputForm({ notes, setNotes }) {
+function NoteInputForm() {
     const [isExpanded, setExpanded] = useState(false);
 
+    const { user } = useContext(UserContext);
+    const { addNote, notes, setNotes } = useContext(NoteContext);
 
     const [note, setNote] = useState({
-        id: new Date().valueOf().toString(),
+        id: user.uid,
         title: "",
         content: "",
+        timestamp: new Date().valueOf().toString(),
     });
 
     function handleChange(e) {
@@ -28,16 +33,19 @@ function NoteInputForm({ notes, setNotes }) {
 
     function submitButton(event) {
         event.preventDefault();
-        setNote({
-            id: new Date().valueOf().toString(),
-            title: "",
-            content: "",
-        });
 
         setNotes([
             ...notes,
             note
         ])
+
+        addNote(note);
+        setNote({
+            id: user.uid,
+            title: "",
+            content: "",
+            timestamp: new Date().valueOf().toString()
+        });
     }
 
 

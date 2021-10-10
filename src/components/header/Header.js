@@ -14,10 +14,10 @@ const Header = () => {
 
     return (
         <nav className="header-container">
-            <h2> Logo </h2>
+            <h2> notestudio </h2>
             {
                 user !== null ? (
-                    <button onClick={onLogout}>Logout</button>
+                    <button onClick={onLogout} className="button">Logout</button>
                 ) : (
                     null
                 )

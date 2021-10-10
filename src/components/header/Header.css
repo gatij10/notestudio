@@ -7,3 +7,17 @@
   position: relative;
   flex-wrap: nowrap;
 }
+
+.logo {
+  font-family: "Italianno", cursive;
+}
+
+.button {
+  background: none;
+  color: white;
+  font-size: medium;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 7px;
+}
